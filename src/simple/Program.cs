@@ -41,13 +41,8 @@ namespace Simple
             using IHost host = CreateHostBuilder(args).Build();
             //mapping static variable to strongly typed class
             var appSecrets = Configuration.GetSection(nameof(MyAppSecrets)).Get<MyAppSecrets>();
-
             var eventHubConnectionString = appSecrets.EventHubConnectionString;
-            Console.WriteLine($"Event Hubs connection string: {eventHubConnectionString}");
-
             var eventHubName = appSecrets.EventHubName;
-            Console.WriteLine($"Event Hubs name: {eventHubName}");
-
             var inventoryLocation = new string[]{
                 "US",
                 "EU",
