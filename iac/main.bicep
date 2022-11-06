@@ -375,6 +375,10 @@ resource functionAppName 'Microsoft.Web/sites@2020-06-01' = {
           name: 'COSMOS_DB_CONNECTION_STRING'
           value: accountName_resource.listConnectionStrings().connectionStrings[0].connectionString
         }
+        {
+          name: 'EVENTHUB_CONNECTION_STRING'
+          value: namespaceName_eventHubName.listKeys().primaryConnectionString
+        }
       ]
     }
   }
