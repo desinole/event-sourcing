@@ -3,9 +3,6 @@ on:
     # Sequence of patterns matched against refs/heads
     branches:    
       - main
-    paths:
-      - 'iac/**'
-      - 'github/workflows/**'
 name: Azure ARM
 jobs:
   build-and-deploy:
