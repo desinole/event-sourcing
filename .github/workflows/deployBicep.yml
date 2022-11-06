@@ -5,7 +5,7 @@ on:
       - main
     paths:
       - 'iac/**'
-      - './github/workflows/**'
+      - 'github/workflows/**'
 name: Azure ARM
 jobs:
   build-and-deploy:
