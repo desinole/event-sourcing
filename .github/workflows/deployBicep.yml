@@ -4,7 +4,8 @@ on:
     branches:    
       - main
     paths:
-      - './iac/**'
+      - 'iac/**'
+      - './github/workflows/**'
 name: Azure ARM
 jobs:
   build-and-deploy:
