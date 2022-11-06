@@ -143,7 +143,7 @@ param runtime string = 'dotnet'
 var functionAppName_var = appName
 var hostingPlanName_var = appName
 var applicationInsightsName_var = appName
-var storageAccountName_var = '${uniqueString(resourceGroup().id)}azfunctions'
+var storageAccountName_var = 'st${uniqueString(resourceGroup().id)}'
 var functionWorkerRuntime = runtime
 
 resource namespaceName_resource 'Microsoft.EventHub/namespaces@2018-01-01-preview' = {
