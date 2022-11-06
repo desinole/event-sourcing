@@ -1,4 +1,8 @@
-on: [push]
+on:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:    
+      - main
 name: Azure ARM
 jobs:
   build-and-deploy:
