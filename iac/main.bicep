@@ -182,7 +182,7 @@ resource namespaceName_eventHubName_authorizationRole 'Microsoft.EventHub/namesp
   }
 }
 
-resource streamAnalyticsJobName_resource 'Microsoft.StreamAnalytics/StreamingJobs@2019-06-01' = {
+resource streamAnalyticsJobName_resource 'Microsoft.StreamAnalytics/streamingjobs@2020-03-01' = {
   name: streamAnalyticsJobName
   location: location
   properties: {
