@@ -143,7 +143,7 @@ param runtime string = 'dotnet'
 var functionAppName_var = appName
 var hostingPlanName_var = appName
 var applicationInsightsName_var = appName
-var storageAccountName_var = 'st${uniqueString(resourceGroup().id)}'
+var storageAccountNameValue = 'st${uniqueString(resourceGroup().id)}'
 var functionWorkerRuntime = runtime
 
 resource namespaceName_resource 'Microsoft.EventHub/namespaces@2018-01-01-preview' = {
@@ -314,7 +314,7 @@ resource accountName_databaseName_containerName 'Microsoft.DocumentDB/databaseAc
 }
 
 resource storageAccountName 'Microsoft.Storage/storageAccounts@2019-06-01' = {
-  name: storageAccountName_var
+  name: storageAccountNameValue
   location: location
   sku: {
     name: storageAccountType
@@ -345,11 +345,11 @@ resource functionAppName 'Microsoft.Web/sites@2020-06-01' = {
       appSettings: [
         {
           name: 'AzureWebJobsStorage'
-          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName_var};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccountName.id, '2019-06-01').keys[0].value}'
+          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountNameValue};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccountName.id, '2019-06-01').keys[0].value}'
         }
         {
           name: 'WEBSITE_CONTENTAZUREFILECONNECTIONSTRING'
-          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName_var};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccountName.id, '2019-06-01').keys[0].value}'
+          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountNameValue};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccountName.id, '2019-06-01').keys[0].value}'
         }
         {
           name: 'WEBSITE_CONTENTSHARE'
