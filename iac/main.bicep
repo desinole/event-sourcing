@@ -92,7 +92,7 @@ param maxStalenessPrefix int = 100000
 param maxIntervalInSeconds int = 300
 
 
-var accountName_var = toLower(accountName)
+var accountNameValue = toLower(accountName)
 var consistencyPolicy = {
   Eventual: {
     defaultConsistencyLevel: 'Eventual'
@@ -251,7 +251,7 @@ resource streamAnalyticsJobName_output 'Microsoft.StreamAnalytics/streamingjobs/
 }
 
 resource accountName_resource 'Microsoft.DocumentDB/databaseAccounts@2021-01-15' = {
-  name: accountName_var
+  name: accountNameValue
   kind: 'GlobalDocumentDB'
   location: location
   properties: {
