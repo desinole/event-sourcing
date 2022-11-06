@@ -140,9 +140,9 @@ param storageAccountType string = 'Standard_LRS'
 ])
 param runtime string = 'dotnet'
 
-var functionAppName_var = appName
-var hostingPlanName_var = appName
-var applicationInsightsName_var = appName
+var functionAppNameValue = appName
+var hostingPlanNameValue = appName
+var applicationInsightsNameValue = appName
 var storageAccountNameValue = 'st${uniqueString(resourceGroup().id)}'
 var functionWorkerRuntime = runtime
 
@@ -323,20 +323,20 @@ resource storageAccountName 'Microsoft.Storage/storageAccounts@2019-06-01' = {
 }
 
 resource hostingPlanName 'Microsoft.Web/serverfarms@2020-06-01' = {
-  name: hostingPlanName_var
+  name: hostingPlanNameValue
   location: location
   sku: {
     name: 'Y1'
     tier: 'Dynamic'
   }
   properties: {
-    name: hostingPlanName_var
+    name: hostingPlanNameValue
     computeMode: 'Dynamic'
   }
 }
 
 resource functionAppName 'Microsoft.Web/sites@2020-06-01' = {
-  name: functionAppName_var
+  name: functionAppNameValue
   location: location
   kind: 'functionapp'
   properties: {
@@ -353,7 +353,7 @@ resource functionAppName 'Microsoft.Web/sites@2020-06-01' = {
         }
         {
           name: 'WEBSITE_CONTENTSHARE'
-          value: toLower(functionAppName_var)
+          value: toLower(functionAppNameValue)
         }
         {
           name: 'FUNCTIONS_EXTENSION_VERSION'
@@ -381,13 +381,13 @@ resource functionAppName 'Microsoft.Web/sites@2020-06-01' = {
 }
 
 resource applicationInsightsName 'microsoft.insights/components@2020-02-02-preview' = {
-  name: applicationInsightsName_var
+  name: applicationInsightsNameValue
   location: location
   tags: {
-    'hidden-link:${resourceId('Microsoft.Web/sites', applicationInsightsName_var)}': 'Resource'
+    'hidden-link:${resourceId('Microsoft.Web/sites', applicationInsightsNameValue)}': 'Resource'
   }
   properties: {
-    ApplicationId: applicationInsightsName_var
+    ApplicationId: applicationInsightsNameValue
     Request_Source: 'IbizaWebAppExtensionCreate'
   }
 }
