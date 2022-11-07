@@ -377,7 +377,7 @@ resource functionAppName 'Microsoft.Web/sites@2020-06-01' = {
         }
         {
           name: 'EVENTHUB_CONNECTION_STRING'
-          value: namespaceName_resource.listKeys().primaryConnectionString
+          value: namespaceName_eventHubName_authorizationRole.listKeys().primaryConnectionString
         }
       ]
     }
