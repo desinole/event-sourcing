@@ -172,9 +172,9 @@ resource namespaceName_eventHubName_consumerGroupName 'Microsoft.EventHub/namesp
   properties: {}
 }
 
-resource namespaceName_eventHubName_authorizationRole 'Microsoft.EventHub/namespaces/eventhubs/authorizationRules@2021-11-01' = {
+resource namespaceName_eventHubName_authorizationRole 'Microsoft.EventHub/namespaces/authorizationRules@2021-11-01' = {
   name: authorizationRole
-  parent: namespaceName_eventHubName
+  parent: namespaceName_resource
   properties: {
     rights: [
       'Listen'
