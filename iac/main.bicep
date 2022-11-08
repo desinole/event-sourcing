@@ -335,10 +335,13 @@ resource hostingPlanName 'Microsoft.Web/serverfarms@2020-06-01' = {
   }
 }
 
-resource functionAppName 'Microsoft.Web/sites@2020-06-01' = {
+resource functionAppName 'Microsoft.Web/sites@2021-01-01' = {
   name: functionAppNameValue
   location: location
   kind: 'functionapp'
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: hostingPlanName.id
     siteConfig: {
