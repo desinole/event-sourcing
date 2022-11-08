@@ -337,10 +337,6 @@ resource hostingPlanName 'Microsoft.Web/serverfarms@2020-06-01' = {
     name: 'Y1'
     tier: 'Dynamic'
   }
-  properties: {
-    name: hostingPlanNameValue
-    computeMode: 'Dynamic'
-  }
 }
 
 resource functionAppName 'Microsoft.Web/sites@2021-01-01' = {
