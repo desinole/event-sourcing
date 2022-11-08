@@ -91,6 +91,14 @@ param maxStalenessPrefix int = 100000
 @maxValue(86400)
 param maxIntervalInSeconds int = 300
 
+var eventHubNamespacePermissionName = 'AzureEventHubsDataReceiver'
+
+var role = {
+  AzureEventHubsDataOwner: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/f526a384-b230-433a-b45c-95f59c4a2dec'
+  AzureEventHubsDataReceiver: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/a638d3c7-ab3a-418d-83e6-5f17a39d4fde'
+  AzureEventHubsDataSender: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/2b629674-e913-4c01-ae53-ef4638d8f975'
+}
+
 
 var accountNameValue = toLower(accountName)
 var consistencyPolicy = {
@@ -396,5 +404,15 @@ resource applicationInsightsName 'microsoft.insights/components@2020-02-02-previ
   properties: {
     ApplicationId: applicationInsightsNameValue
     Request_Source: 'IbizaWebAppExtensionCreate'
+  }
+}
+
+resource EventHubPermissions 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(functionAppName.id, namespaceName_eventHubName.id)
+  scope: namespaceName_eventHubName
+  properties: {
+    principalId: functionAppName.identity.principalId
+    roleDefinitionId: role[eventHubNamespacePermissionName]
+    principalType: 'ServicePrincipal'
   }
 }
