@@ -395,7 +395,7 @@ resource applicationInsightsName 'microsoft.insights/components@2020-02-02-previ
     'hidden-link:${resourceId('Microsoft.Web/sites', applicationInsightsNameValue)}': 'Resource'
   }
   properties: {
-    ApplicationId: applicationInsightsNameValue
+    Application_Type: 'web'
     Request_Source: 'IbizaWebAppExtensionCreate'
   }
 }
