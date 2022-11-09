@@ -389,6 +389,7 @@ resource functionAppName 'Microsoft.Web/sites@2021-01-01' = {
 
 resource applicationInsightsName 'microsoft.insights/components@2020-02-02-preview' = {
   name: applicationInsightsNameValue
+  kind: 'java'
   location: location
   tags: {
     'hidden-link:${resourceId('Microsoft.Web/sites', applicationInsightsNameValue)}': 'Resource'
