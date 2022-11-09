@@ -31,13 +31,14 @@ namespace Simple
     {
         static IConfiguration Configuration;
         // number of events to be sent to the event hub
-        private const int numOfEvents = 1000;
 
         // The Event Hubs client types are safe to cache and use as a singleton for the lifetime
         // of the application, which is best practice when events are being published or read regularly.
         static EventHubProducerClient producerClient;
+
         static async Task Main(string[] args)
         {
+            int numOfEvents = (int)new Random().NextInt64(1000,2000);
             using IHost host = CreateHostBuilder(args).Build();
             //mapping static variable to strongly typed class
             var appSecrets = Configuration.GetSection(nameof(MyAppSecrets)).Get<MyAppSecrets>();
