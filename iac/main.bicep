@@ -71,10 +71,10 @@ param accountName string = 'sql-${uniqueString(resourceGroup().id)}'
 param defaultConsistencyLevel string = 'Session'
 
 @description('The name for the database')
-param databaseName string = 'db-${uniqueString(resourceGroup().id)}'
+param databaseName string = 'dbInventory'
 
 @description('The name for the container')
-param containerName string = 'container-${uniqueString(resourceGroup().id)}'
+param containerInventory string = 'containerInventory'
 
 @description('Maximum throughput for the container')
 @minValue(4000)
@@ -249,7 +249,7 @@ resource streamAnalyticsJobName_output 'Microsoft.StreamAnalytics/streamingjobs/
     datasource: {
       type: 'Microsoft.Storage/DocumentDB'
       properties: {
-          collectionNamePattern: containerName
+          collectionNamePattern: containerInventory
           accountKey: accountName_resource.listKeys().primaryMasterKey
           accountId: accountName
           database: databaseName
@@ -280,12 +280,12 @@ resource accountName_databaseName 'Microsoft.DocumentDB/databaseAccounts/sqlData
   }
 }
 
-resource accountName_databaseName_containerName 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2021-01-15' = {
+resource accountName_databaseName_containerInventory 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2021-01-15' = {
   parent: accountName_databaseName
-  name: containerName
+  name: containerInventory
   properties: {
     resource: {
-      id: containerName
+      id: containerInventory
       partitionKey: {
         paths: [
           '/LocationId'
@@ -381,10 +381,6 @@ resource functionAppName 'Microsoft.Web/sites@2021-01-01' = {
         {
           name: 'COSMOS_DB_CONNECTION_STRING'
           value: accountName_resource.listConnectionStrings().connectionStrings[0].connectionString
-        }
-        {
-          name: 'EVENTHUB_CONNECTION_STRING'
-          value: namespaceName_eventHubName_authorizationRole.listKeys().primaryConnectionString
         }
       ]
     }
