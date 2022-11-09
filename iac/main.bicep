@@ -311,7 +311,7 @@ resource accountName_databaseName_containerName 'Microsoft.DocumentDB/databaseAc
           }
         ]
       }
-      defaultTtl: 864000
+      defaultTtl: -1
     }
     options: {
       autoscaleSettings: {
