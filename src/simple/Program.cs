@@ -44,11 +44,13 @@ namespace Simple
             var appSecrets = Configuration.GetSection(nameof(MyAppSecrets)).Get<MyAppSecrets>();
             var eventHubConnectionString = appSecrets.EventHubConnectionString;
             var eventHubName = appSecrets.EventHubName;
+            //pick a random location
             var inventoryLocation = new string[]{
                 "US",
                 "EU",
                 "ASIA"
             };
+            //pick a random manufacturer
             var manufacturer = new string[]{
                 "Apple",
                 "Microsoft",
@@ -56,17 +58,17 @@ namespace Simple
                 "Samsung",
                 "LG"
             };
-
+            //pick a random inventory type
             var inventoryType = new string[]{
                 "Store",
                 "Warehouse"
             };
-
+            //pick a random action type
             var inventoryAction = new string[]{
                 "Ship",
                 "Stock"
             };
-
+            //generate a bunch of fake inventory data
             var items = new Faker<Inventory>()
                 .RuleFor(o => o.ActionType, f => f.PickRandom(inventoryAction))
                 .RuleFor(o => o.InventoryType, f => f.PickRandom(inventoryType))
